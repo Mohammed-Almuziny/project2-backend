@@ -38,4 +38,37 @@ const signUp = (req, res) => {
   });
 };
 
-module.exports = { signUp };
+const logIn = (req, res) => {
+  const { userNameOrEmail, password } = req.params;
+  let userName = "";
+
+  users.find((err, data) => {
+    let key;
+
+    data.forEach((elm) => {
+      console.log(data);
+      if (elm.userName === userNameOrEmail || elm.email === userNameOrEmail)
+        if (elm.password === password) {
+          key = 1;
+          userName = elm.userName;
+        } else key = 2;
+    });
+
+    console.log(key);
+    switch (key) {
+      case 1:
+        res.status(200).json(userName);
+        break;
+
+      case 2:
+        res.status(403).json("wrnog password");
+        break;
+
+      default:
+        res.status(403).json("this user name or email dose not existing");
+        break;
+    }
+  });
+};
+
+module.exports = { signUp, logIn };
