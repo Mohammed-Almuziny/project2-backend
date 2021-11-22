@@ -1,0 +1,15 @@
+const mongoose = require("mongoose");
+
+const quizzesModel = new mongoose.Schema({
+  createrName: { type: "string", required: true },
+  category: { type: "string", required: true },
+  questions: [
+    {
+      question: { type: String },
+      answers: [{ type: String }],
+      correctAnswer: { type: String },
+    },
+  ],
+});
+
+module.exports = mongoose.model("quizzes", quizzesModel);
