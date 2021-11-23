@@ -72,13 +72,24 @@ const logIn = (req, res) => {
 };
 
 const saveResult = (req, res) => {
-  const {userName, quizId, answers, score} = req.body;
-  users.findOneAndUpdate(
-    { userName },
-    { $push: { history: { quizId, answers, score } } }
-  ).exec();
-  console.log(users);
+  const { userName, quizId, answers, score } = req.body;
+
+  users
+    .findOneAndUpdate(
+      { userName },
+      { $push: { history: { quizId, answers, score } } }
+    )
+    .exec();
+
   res.json(users);
 };
 
-module.exports = { signUp, logIn, saveResult };
+const getHistory = (req, res) => {
+  const { userName } = req.params;
+
+  users.findOne({ userName }, (err, data) => {
+    res.json(data.history);
+  });
+};
+
+module.exports = { signUp, logIn, saveResult, getHistory };
