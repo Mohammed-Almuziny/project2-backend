@@ -71,4 +71,14 @@ const logIn = (req, res) => {
   });
 };
 
-module.exports = { signUp, logIn };
+const saveResult = (req, res) => {
+  const {userName, quizId, answers, score} = req.body;
+  users.findOneAndUpdate(
+    { userName },
+    { $push: { history: { quizId, answers, score } } }
+  ).exec();
+  console.log(users);
+  res.json(users);
+};
+
+module.exports = { signUp, logIn, saveResult };
