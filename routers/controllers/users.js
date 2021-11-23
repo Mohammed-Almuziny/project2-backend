@@ -81,7 +81,7 @@ const saveResult = (req, res) => {
     )
     .exec();
 
-  res.json(users);
+  res.json("results saved");
 };
 
 const getHistory = (req, res) => {
