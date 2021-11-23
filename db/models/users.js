@@ -7,7 +7,7 @@ const accountsModel = new mongoose.Schema({
   history: [
     {
       quizId: { type: String },
-      answers: [{ type: String }],
+      quizTitle: { type: String },
       score: { type: Number},
     },
     {
