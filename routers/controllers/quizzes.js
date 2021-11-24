@@ -46,4 +46,16 @@ const getQuizById = (req, res) => {
   });
 };
 
-module.exports = { getAllQuizzes, createQuizFromApi, getQuizById };
+const createQuiz = (req, res) => {
+  try {
+    const newQuiz = new quizzes(req.body);
+
+    newQuiz.save();
+    res.status(200).json(newQuiz);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err.message);
+  }
+};
+
+module.exports = { getAllQuizzes, createQuizFromApi, getQuizById, createQuiz };
