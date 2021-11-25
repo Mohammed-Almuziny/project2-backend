@@ -1,4 +1,5 @@
 const users = require("./../../db/models/users");
+const quizzes = require("../../db/models/quizzes");
 
 const signUp = (req, res) => {
   const user = new users(req.body);
@@ -95,7 +96,6 @@ const getHistory = (req, res) => {
 const changePassword = async (req, res) => {
   const { userName, newPassword } = req.body;
 
- 
   users.findOneAndUpdate(
     { userName },
     { password: newPassword },
@@ -106,4 +106,20 @@ const changePassword = async (req, res) => {
   );
 };
 
-module.exports = { signUp, logIn, saveResult, getHistory, changePassword };
+const getUserCreations = (req, res) => {
+  const { userName } = req.params;
+
+  quizzes.find({ createrName: userName }, (err, data) => {
+    if (!err) res.json(data);
+    else res.json(err);
+  });
+};
+
+module.exports = {
+  signUp,
+  logIn,
+  saveResult,
+  getHistory,
+  changePassword,
+  getUserCreations,
+};
