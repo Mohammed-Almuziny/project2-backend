@@ -95,6 +95,7 @@ const getHistory = (req, res) => {
 const changePassword = async (req, res) => {
   const { userName, newPassword } = req.body;
 
+ 
   users.findOneAndUpdate(
     { userName },
     { password: newPassword },
