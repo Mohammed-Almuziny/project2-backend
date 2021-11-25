@@ -92,4 +92,17 @@ const getHistory = (req, res) => {
   });
 };
 
-module.exports = { signUp, logIn, saveResult, getHistory };
+const changePassword = async (req, res) => {
+  const { userName, newPassword } = req.body;
+
+  users.findOneAndUpdate(
+    { userName },
+    { password: newPassword },
+    (err, data) => {
+      if (err) res.json(err);
+      else res.json(data);
+    }
+  );
+};
+
+module.exports = { signUp, logIn, saveResult, getHistory, changePassword };
