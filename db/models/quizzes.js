@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const quizzesModel = new mongoose.Schema({
   createrName: { type: "string", required: true },
-  title: { type: "string", required: true, unique: true},
+  title: { type: "string", required: true, unique: true },
   category: { type: "string", required: true },
   questions: [
     {
@@ -11,6 +11,7 @@ const quizzesModel = new mongoose.Schema({
       correctAnswer: { type: String },
     },
   ],
+  totalQuestions: { type: "number", required: true },
 });
 
 module.exports = mongoose.model("quizzes", quizzesModel);

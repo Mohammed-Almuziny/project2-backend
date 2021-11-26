@@ -12,13 +12,13 @@ const getAllQuizzes = async (req, res) => {
 
 const createQuizFromApi = async (req, res) => {
   const result = await axios.get(
-    "https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple"
+    "https://opentdb.com/api.php?amount=10&category=12&difficulty=easy&type=multiple"
   );
   const quiz = {};
 
   quiz.createrName = "Admin";
-  quiz.title = "easy film quiz";
-  quiz.category = "film";
+  quiz.title = "easy music quiz";
+  quiz.category = "music";
   quiz.questions = [];
 
   result.data.results.map((item, index) => {
@@ -31,11 +31,12 @@ const createQuizFromApi = async (req, res) => {
     quiz.questions.push(newObj);
   });
 
+  quiz.totalQuestions = quiz.questions.length;
   const newQuiz = new quizzes(quiz);
 
   newQuiz.save();
 
-  console.log(quiz.questions);
+  console.log(quiz.questions.length);
   res.json(quiz);
 };
 

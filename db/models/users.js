@@ -8,11 +8,12 @@ const accountsModel = new mongoose.Schema({
     {
       quizId: { type: String },
       quizTitle: { type: String },
-      score: { type: Number},
+      score: { type: Number },
+      totalQuestions: { type: Number },
     },
     {
-      timestamps: true
-    }
+      timestamps: true,
+    },
   ],
 });
 
