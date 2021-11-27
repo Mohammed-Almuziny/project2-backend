@@ -1,7 +1,7 @@
 const users = require("./../../db/models/users");
 const quizzes = require("../../db/models/quizzes");
 
-const signUp = (req, res) => {
+const register = (req, res) => {
   const user = new users(req.body);
 
   users.find((err, data) => {
@@ -116,7 +116,7 @@ const getUserCreations = (req, res) => {
 };
 
 module.exports = {
-  signUp,
+  register,
   logIn,
   saveResult,
   getHistory,
