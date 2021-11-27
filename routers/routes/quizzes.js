@@ -2,14 +2,16 @@ const express = require("express");
 
 const {
   getAllQuizzes,
+  getQuizzes,
   createQuizFromApi,
   getQuizById,
-  createQuiz
+  createQuiz,
 } = require("../controllers/quizzes");
 
 const quizzesRouter = express.Router();
 
 quizzesRouter.get("/", getAllQuizzes);
+quizzesRouter.get("/getQuizzes", getQuizzes);
 quizzesRouter.post("/create", createQuiz);
 quizzesRouter.get("/quizById/:id", getQuizById);
 quizzesRouter.post("/createQuizFromApi", createQuizFromApi);

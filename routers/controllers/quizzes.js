@@ -10,6 +10,30 @@ const getAllQuizzes = async (req, res) => {
   });
 };
 
+const getQuizzes = (req, res) => {
+  const { category, amount } = req.query;
+
+  // quizzes.find({ category }, (err, data) => {
+  //   res.json(data);
+  // });
+
+  // if(Number(amount)) amount = Number(amount);
+  // else console.log(false);
+
+  quizzes
+    .find({ category })
+    .limit(Number(amount) || amount)
+    .exec((err, data) => {
+      if (err) {
+        res.status(300).json(err);
+      } else {
+        res.status(200).json(data);
+      }
+    });
+
+  // res.json(req.query);
+};
+
 const createQuizFromApi = async (req, res) => {
   const result = await axios.get(
     "https://opentdb.com/api.php?amount=10&category=12&difficulty=easy&type=multiple"
@@ -59,4 +83,10 @@ const createQuiz = (req, res) => {
   }
 };
 
-module.exports = { getAllQuizzes, createQuizFromApi, getQuizById, createQuiz };
+module.exports = {
+  getAllQuizzes,
+  getQuizzes,
+  createQuizFromApi,
+  getQuizById,
+  createQuiz,
+};
