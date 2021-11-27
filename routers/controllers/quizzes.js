@@ -13,15 +13,16 @@ const getAllQuizzes = async (req, res) => {
 const getQuizzes = (req, res) => {
   const { title, category, amount } = req.query;
 
-  // quizzes.find({ category }, (err, data) => {
-  //   res.json(data);
-  // });
-
-  // if(Number(amount)) amount = Number(amount);
-  // else console.log(false);
   let filter;
-  if (category) filter = { title: { $regex: title || "" }, category: category };
-  else filter = { title: { $regex: title || "" } };
+  if (title) {
+    if (category && category !== "all category")
+      filter = { title: { $regex: title || "" }, category: category };
+    else filter = { title: { $regex: title || "" } };
+  } else if (category && category !== "all category") {
+    filter = { title: { $regex: title || "" }, category: category };
+  } else {
+    filter = {};
+  }
 
   quizzes
     .find(filter)
@@ -34,7 +35,6 @@ const getQuizzes = (req, res) => {
       }
     });
 
-  // res.json(req.query);
 };
 
 const createQuizFromApi = async (req, res) => {
