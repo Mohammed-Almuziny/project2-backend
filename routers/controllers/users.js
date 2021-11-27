@@ -73,12 +73,12 @@ const logIn = (req, res) => {
 };
 
 const saveResult = (req, res) => {
-  const { userName, quizId, quizTitle, score } = req.body;
+  const { userName, quizId, quizTitle, totalQuestions, score } = req.body;
 
   users
     .findOneAndUpdate(
       { userName },
-      { $push: { history: { quizId, quizTitle, score } } }
+      { $push: { history: { quizId, quizTitle, totalQuestions, score } } }
     )
     .exec();
 
